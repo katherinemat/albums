@@ -1,0 +1,13 @@
+@{
+  Layout="Shared/_Layout.cshtml";
+}
+
+<h3>Here are all the albums for @Model["artist"].GetName()</h3>
+ <ol>
+   @foreach (var album in @Model["albums"])
+    {
+      <li>@album.GetName()</li>
+    }
+ </ol>
+
+<p><a href="/">Home page</a></p>
