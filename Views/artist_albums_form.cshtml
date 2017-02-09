@@ -4,8 +4,8 @@
 
 <h3>Add Albums:</h3>
 
-<form class="" action="/albums" method="post">
-  <input id="artist-id" type="hidden" name="artist-id" value="@Model['artist'].GetId()">
+<form class="" action="/artist/albums" method="post">
+  <input id="artist-id" type="hidden" name="artist-id" value='@Model["artist"].GetId()'>
   <label for="albums">Enter an album</label>
   <input type="text" name="albums" id="albums">
   <button type="submit" name="button">Submit</button>

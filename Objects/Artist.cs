@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Album.Objects
+namespace AlbumCollection.Objects
 {
   public class Artist
   {

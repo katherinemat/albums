@@ -1,8 +1,8 @@
 using Nancy;
 using System.Collections.Generic;
-using Album.Objects;
+using AlbumCollection.Objects;
 
-namespace Album
+namespace AlbumCollection
 {
   public class HomeModule : NancyModule
   {
@@ -30,6 +30,25 @@ namespace Album
         List<Album> artistAlbums = selectedArtist.GetAlbums();
         model.Add("artist", selectedArtist);
         model.Add("albums", artistAlbums);
+        return View["artist.cshtml", model];
+      };
+      Get["/artist/{id}/album/new"] = parameters => {
+        Dictionary<string, object> model = new Dictionary<string, object>();
+        Artist selectedArtist = Artist.Find(parameters.id);
+        List<Album> allAlbums = selectedArtist.GetAlbums();
+        model.Add("artist", selectedArtist);
+        model.Add("album", allAlbums);
+        return View["artist_albums_form.cshtml", model];
+      };
+      Post["/artist/albums"] = _ => {
+        Dictionary<string, object> model = new Dictionary<string, object>();
+        Artist selectedArtist = Artist.Find(Request.Form["artist-id"]);
+        List<Album> artistAlbums = selectedArtist.GetAlbums();
+        string albumName = Request.Form["albums"];
+        Album newAlbum = new Album(albumName);
+        artistAlbums.Add(newAlbum);
+        model.Add("albums", artistAlbums);
+        model.Add("artist", selectedArtist);
         return View["artist.cshtml", model];
       };
     }
