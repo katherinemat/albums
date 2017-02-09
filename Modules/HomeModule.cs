@@ -51,6 +51,10 @@ namespace AlbumCollection
         model.Add("artist", selectedArtist);
         return View["artist.cshtml", model];
       };
+
+      Get["/artist/search"] = _ => {
+        return View["search_by_artist.cshtml"];
+      };
     }
   }
 }
