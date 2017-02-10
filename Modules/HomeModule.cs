@@ -55,6 +55,26 @@ namespace AlbumCollection
       Get["/artist/search"] = _ => {
         return View["search_by_artist.cshtml"];
       };
+
+      Post["/artist/search"] = _ => {
+        List<int> matchSpot = Artist.Match(Request.Form["artist-search"]);
+        Dictionary<string, object> model = new Dictionary<string, object>();
+        if (matchSpot.Count > 0)
+        {
+          foreach(int id in matchSpot)
+          {
+            Artist selectedArtist = Artist.Find(id);
+            List<Album> artistAlbums = selectedArtist.GetAlbums();
+            model.Add("artist", selectedArtist);
+            model.Add("albums", artistAlbums);
+          }
+          return View["search_by_artist.cshtml", model];
+        }
+        else
+        {
+          return View["search_by_artist.cshtml", model];
+        }
+      };
     }
   }
 }

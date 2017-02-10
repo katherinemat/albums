@@ -46,5 +46,17 @@ namespace AlbumCollection.Objects
     {
       return _instances[searchId-1];
     }
+
+    public static List<int> Match(string userSearch)
+    {
+      List<int> match = new List<int>{};
+      foreach(Artist artist in _instances) {
+        if (userSearch == artist.GetName())
+        {
+          match.Add(artist.GetId());
+        }
+      }
+      return match;
+    }
   }
 }
